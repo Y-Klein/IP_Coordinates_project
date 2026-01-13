@@ -13,7 +13,6 @@ def get_coordinates(ip: str):
 
 
 def send_to_service_b(coordinates: dict):
-    print(coordinates)
     response = requests.post(
         f"{SERVICE_B_URL}/coordinates",
         json=coordinates,
