@@ -1,12 +1,19 @@
 import redis
+import json
 
 data = {
-    'name': 'John',
-    "surname": 'Smith',
-    "company": 'Redis',
-    "age": 29
+    "lat": 31.7674,
+    "lon": 35.2186,
+}
+data2 = {
+    "lat": 31.1111,
+    "lon": 35.2222,
 }
 
-with redis.Redis(host='localhost', port=6379, decode_responses=True) as r:
-    r.hset('user-session:123', mapping=data)
-    print(r.hgetall('user-session:123'))
+with redis.Redis(host='localhost', port=6365, decode_responses=True) as r:
+    # r.set("data2", json.dumps(data))
+    # tudent_obj_as_dict = json.loads(r.get("data"))
+    # print(tudent_obj_as_dict)
+    for key in r.scan_iter("data:"):
+        print("!")
+        print(key)
