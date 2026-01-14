@@ -6,7 +6,7 @@ IP_API_URL = "http://ip-api.com/json/"
 
 
 def get_coordinates(ip: str):
-    response = requests.get(f"http://ip-api.com/json/{ip}?fields=lat,lon", timeout=5)
+    response = requests.get(f"http://ip-api.com/json/{ip}?fields=query,lat,lon", timeout=5)
 
     data = response.json()
     return data
