@@ -1,0 +1,14 @@
+services:
+  db:
+    image: redis
+    ports:
+      - "6379"
+  serviceA:
+    image: refaelsaidov1/service-a:v1
+    ports:
+      - "8002:8002"
+
+  serviceB:
+    image: yklain/service_b:v1
+    ports:
+      - "8001"
