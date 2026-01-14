@@ -1,19 +1,21 @@
-import redis
-import json
+from fastapi import APIRouter, HTTPException
+from storage import *
 
-data = {
-    "lat": 31.7674,
-    "lon": 35.2186,
-}
-data2 = {
-    "lat": 31.1111,
-    "lon": 35.2222,
-}
+router = APIRouter()
 
-with redis.Redis(host='localhost', port=6365, decode_responses=True) as r:
-    # r.set("data2", json.dumps(data))
-    # tudent_obj_as_dict = json.loads(r.get("data"))
-    # print(tudent_obj_as_dict)
-    for key in r.scan_iter("data:"):
-        print("!")
-        print(key)
+
+@router.post("/coordinates")
+def saving_in_db(ip_json:dict):
+    try:
+        writing(ip_json)
+        return {"status": "ok", "data": ip_json}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@router.get("/get-all")
+def get_all():
+    try:
+        return get_all_ip()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+

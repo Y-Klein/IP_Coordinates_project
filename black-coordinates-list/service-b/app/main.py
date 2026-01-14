@@ -1,13 +1,11 @@
 from fastapi import FastAPI
+from routes import router
 import uvicorn
 
 
 app = FastAPI()
 
-
-@app.get("/")
-def root():
-    return "hi😊"
+app.include_router(router)
 
 
 if __name__ == "__main__":
